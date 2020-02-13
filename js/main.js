@@ -16,8 +16,10 @@ var LIKES = {
 };
 
 var getRandomPoint = function (min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+}
 
 var getRandomElement = function (arr) {
   var randomindex = Math.floor(Math.random() * arr.length);
@@ -38,6 +40,8 @@ var template = document.querySelector('#picture').content.querySelector('.pictur
 
 for (var j = 0; j < photos.length; j++) {
   var element = template.cloneNode(true);
-  template.querySelector('img').src = photos[j].url;
+  template.querySelector('.picture__img').src = photos[j].url;
+  template.querySelector('.picture__comments').textContent = photos.comments;
+  template.querySelector('.picture__likes').textContent = photos.likes;
   cards.appendChild(element);
 }
