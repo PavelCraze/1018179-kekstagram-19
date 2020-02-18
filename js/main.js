@@ -10,10 +10,12 @@ var COMMENTS = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
 
-var LIKES = {
+var likes = {
   MIN: 15,
   MAX: 200
 };
+
+const photosAmount = 25;
 
 var getRandomPoint = function (min, max) {
   min = Math.ceil(min);
@@ -24,23 +26,28 @@ var getRandomPoint = function (min, max) {
 var getRandomElement = function (arr) {
   return Math.floor(Math.random() * arr.length);
 };
-var photos = [];
-for (var i = 1; i < 26; i++) {
-  photos[i] = {
-    url: 'photos/' + (i + 1) + '.jpg',
-    likes: getRandomPoint(LIKES.MIN, LIKES.MAX),
-    comments: getRandomElement(COMMENTS)
-  };
+var getPhotos = function () {
+  var photos = [];
+  for (var i = 0; i <= photosAmount; i++) {
+    var photosData = {
+      url: 'photos/' + (i + 1) + '.jpg',
+      likes: getRandomPoint(likes.min, likes.max),
+      comments: getRandomElement(COMMENTS)
+    }
+    photos.push(photosData);
+  }
+  return photos;
 }
 
-var cards = document.querySelector('.pictures');
+var makeElement = function () {
+  var cards = document.querySelector('.pictures');
 
-var template = document.querySelector('#picture').content.querySelector('.picture');
+  var template = document.querySelector('#picture').content.querySelector('.picture');
 
-for (var j = 1; j < photos.length; j++) {
-  var element = template.cloneNode(true);
-  template.querySelector('.picture__img').src = photos[j].url;
-  template.querySelector('.picture__comments').textContent = photos[j].comments;
-  template.querySelector('.picture__likes').textContent = photos[j].likes;
-  cards.appendChild(element);
+  for (var j = 0; j < 25; j++) {
+    var element = template.cloneNode(true);
+
+    cards.appendChild(element);
+  }
+  return
 }
