@@ -10,12 +10,12 @@ var COMMENTS = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
 
-var likes = {
+var Likes = {
   MIN: 15,
   MAX: 200
 };
 
-const photosAmount = 25;
+var PHOTOS_AMOUNT = 25;
 
 var getRandomPoint = function (min, max) {
   min = Math.ceil(min);
@@ -28,10 +28,10 @@ var getRandomElement = function (arr) {
 };
 var getPhotos = function () {
   var photos = [];
-  for (var i = 0; i <= photosAmount; i++) {
+  for (var i = 0; i <= 25; i++) {
     var photosData = {
       url: 'photos/' + (i + 1) + '.jpg',
-      likes: getRandomPoint(likes.min, likes.max),
+      likes: getRandomPoint(Likes.min, Likes.max),
       comments: getRandomElement(COMMENTS)
     }
     photos.push(photosData);
@@ -49,5 +49,5 @@ var makeElement = function () {
 
     cards.appendChild(element);
   }
-  return
+  return element;
 }
