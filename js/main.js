@@ -16,6 +16,10 @@ var Likes = {
 };
 
 var PHOTOS_AMOUNT = 25;
+var photos = [];
+var cards = document.querySelector('.pictures');
+var template = document.querySelector('#picture').content;
+var photosFragment = document.createDocumentFragment();
 
 var getRandomPoint = function (min, max) {
   min = Math.ceil(min);
@@ -26,28 +30,30 @@ var getRandomPoint = function (min, max) {
 var getRandomElement = function (arr) {
   return Math.floor(Math.random() * arr.length);
 };
+
 var getPhotos = function () {
-  var photos = [];
-  for (var i = 0; i <= 25; i++) {
+  for (var i = 1; i <= 25; i++) {
     var photosData = {
-      url: 'photos/' + (i + 1) + '.jpg',
+      url: 'photos/' + (i) + '.jpg',
       likes: getRandomPoint(Likes.min, Likes.max),
       comments: getRandomElement(COMMENTS)
     }
     photos.push(photosData);
   }
-  return photos;
 }
-
+getPhotos();
+console.log(photos)
 var makeElement = function () {
-  var cards = document.querySelector('.pictures');
-
-  var template = document.querySelector('#picture').content.querySelector('.picture');
-
-  for (var j = 0; j < 25; j++) {
+  for (var j = 0; j < photos.length; j++) {
     var element = template.cloneNode(true);
-
-    cards.appendChild(element);
+    template.querySelector('.picture__img').src = photos[j].url;
+    template.querySelector('.picture__comments').textContent = photos[j].comments;
+    template.querySelector('.picture__likes').textContent = photos[j].likes;
+    photosFragment.appendChild(element);
+    console.log(element)
   }
-  return element;
+  cards.appendChild(photosFragment)
+
 }
+makeElement();
+
