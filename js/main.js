@@ -25,7 +25,7 @@ var getRandomPoint = function (min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min;
-}
+};
 
 var getRandomElement = function (arr) {
   return Math.floor(Math.random() * arr.length);
@@ -35,25 +35,22 @@ var getPhotos = function () {
   for (var i = 1; i <= 25; i++) {
     var photosData = {
       url: 'photos/' + (i) + '.jpg',
-      likes: getRandomPoint(Likes.min, Likes.max),
+      likes: getRandomPoint(Likes.MIN, Likes.MAX),
       comments: getRandomElement(COMMENTS)
-    }
+    };
     photos.push(photosData);
   }
-}
+};
 getPhotos();
-console.log(photos)
 var makeElement = function () {
-  for (var j = 0; j < photos.length; j++) {
+  for (var j = 0; j < PHOTOS_AMOUNT; j++) {
     var element = template.cloneNode(true);
-    template.querySelector('.picture__img').src = photos[j].url;
-    template.querySelector('.picture__comments').textContent = photos[j].comments;
-    template.querySelector('.picture__likes').textContent = photos[j].likes;
+    element.querySelector('.picture__img').src = photos[j].url;
+    element.querySelector('.picture__comments').textContent = photos[j].comments;
+    element.querySelector('.picture__likes').textContent = photos[j].likes;
     photosFragment.appendChild(element);
-    console.log(element)
   }
-  cards.appendChild(photosFragment)
+  cards.appendChild(photosFragment);
 
-}
+};
 makeElement();
-
