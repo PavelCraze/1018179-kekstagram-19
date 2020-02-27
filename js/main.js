@@ -28,7 +28,7 @@ var getRandomPoint = function (min, max) {
 };
 
 var getRandomElement = function (arr) {
-  return Math.floor(Math.random() * arr.length);
+  return arr[Math.floor(Math.random() * arr.length)];
 };
 
 var getPhotos = function () {
@@ -37,7 +37,7 @@ var getPhotos = function () {
     var photosData = {
       url: 'photos/' + i + '.jpg',
       likes: getRandomPoint(Likes.MIN, Likes.MAX),
-      comments: getRandomElement(COMMENTS)
+      comments: getRandomPoint(0, COMMENTS.length)
     };
     photos.push(photosData);
   }
@@ -55,5 +55,8 @@ var makeElement = function (photos) {
   }
   cards.appendChild(photosFragment);
 };
-makeElement(getPhotos());
-
+var init = function(){
+  getPhotos();
+  makeElement(getPhotos());
+};
+init();
