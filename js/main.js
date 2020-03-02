@@ -27,10 +27,6 @@ var getRandomPoint = function (min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 };
 
-var getRandomElement = function (arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
-};
-
 var getPhotos = function () {
   var photos = [];
   for (var i = 1; i <= PHOTOS_AMOUNT; i++) {
@@ -55,7 +51,7 @@ var makeElement = function (photos) {
   }
   cards.appendChild(photosFragment);
 };
-var init = function(){
+var init = function () {
   getPhotos();
   makeElement(getPhotos());
 };
