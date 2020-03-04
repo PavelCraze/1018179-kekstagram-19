@@ -56,3 +56,49 @@ var init = function () {
   makeElement(getPhotos());
 };
 init();
+
+
+var upload = document.querySelector('#upload-file');
+var body = document.querySelector('body');
+var pictureEditor = document.querySelector('.img-upload__overlay');
+var cancel = document.querySelector('.img-upload__cancel');
+var scaleDown = document.querySelector('.scale__control--smaller');
+var scaleUp = document.querySelector('.scale__control--bigger');
+var scaleValue = document.querySelector('.scale__control--value');
+var SCALE_STEP = 25;
+
+var Scale_Range = {
+  MIN: 0,
+  MAX: 100
+}
+
+var UploadHandler = function () {
+  body.classList.add('modal-open');
+  pictureEditor.classList.remove('hidden');
+  scaleValue.value = 100;
+
+};
+var onCancel = function () {
+  body.classList.remove('modal-open');
+  pictureEditor.classList.add('hidden');
+  pictureEditor.value = ' ';
+};
+
+var scaleDownHandler = function () {
+  if (scaleValue.value > Scale_Range.MIN) {
+    scaleValue.value = scaleValue.value - SCALE_STEP;
+  } else {
+    scaleValue.value = 0;
+  }
+};
+
+var scaleUpHandler = function () {
+  scaleValue.value = scaleValue.value + SCALE_STEP;
+
+};
+
+
+upload.addEventListener('change', UploadHandler);
+cancel.addEventListener('click', onCancel);
+scaleDown.addEventListener('click', scaleDownHandler);
+scaleUp.addEventListener('click', scaleUpHandler);
