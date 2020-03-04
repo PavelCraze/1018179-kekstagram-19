@@ -65,17 +65,22 @@ var cancel = document.querySelector('.img-upload__cancel');
 var scaleDown = document.querySelector('.scale__control--smaller');
 var scaleUp = document.querySelector('.scale__control--bigger');
 var scaleValue = document.querySelector('.scale__control--value');
+var uploadImg = document.querySelector('.img-upload__preview');
+var effectRadio = document.querySelector('.effects__radio');
+var effectValue = document.querySelector('.effect-level__value');
+
+
 var SCALE_STEP = 25;
 
-var Scale_Range = {
+var ScaleRange = {
   MIN: 0,
   MAX: 100
-}
+};
 
 var UploadHandler = function () {
   body.classList.add('modal-open');
   pictureEditor.classList.remove('hidden');
-  scaleValue.value = 100;
+  scaleValue.value = '100';
 
 };
 var onCancel = function () {
@@ -85,18 +90,20 @@ var onCancel = function () {
 };
 
 var scaleDownHandler = function () {
-  if (scaleValue.value > Scale_Range.MIN) {
-    scaleValue.value = scaleValue.value - SCALE_STEP;
-  } else {
-    scaleValue.value = 0;
+  if (parseInt(scaleValue.value, 10) > SCALE_STEP) {
+    scaleValue.value = parseInt(scaleValue.value, 10) - SCALE_STEP + '%';
+    uploadImg.style.transform = 'scale(0.' + parseInt(scaleValue.value, 10) + ')';
   }
 };
 
 var scaleUpHandler = function () {
-  scaleValue.value = scaleValue.value + SCALE_STEP;
-
+  if (parseInt(scaleValue.value, 10) < ScaleRange.MAX) {
+    scaleValue.value = parseInt(scaleValue.value, 10) + SCALE_STEP + '%';
+    uploadImg.style.transform = 'scale(0.' + parseInt(scaleValue.value, 10) + ')';
+  } else {
+    uploadImg.style.transform = 'none';
+  }
 };
-
 
 upload.addEventListener('change', UploadHandler);
 cancel.addEventListener('click', onCancel);
