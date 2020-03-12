@@ -68,7 +68,10 @@ var preview = document.querySelector('.img-upload__preview');
 var uploadImg = preview.querySelector('img');
 var effectRadio = document.querySelector('.effects__radio');
 var effectValue = document.querySelector('.effect-level__value');
-
+var keyCode = {
+  ESC: 27,
+  ENTER: 13
+};
 
 var SCALE_STEP = 25;
 
@@ -105,9 +108,7 @@ var scaleUpHandler = function () {
   }
 };
 
-var effectChangeHandler = function () {
-  console.log('Radio works');
-};
+
 
 upload.addEventListener('change', UploadHandler);
 cancel.addEventListener('click', onCancel);
@@ -115,12 +116,11 @@ scaleDown.addEventListener('click', scaleDownHandler);
 scaleUp.addEventListener('click', scaleUpHandler);
 
 
-
 var inputHashtag = document.querySelector('.text__hashtags');
 var submitButton = document.querySelector('#upload-submit');
 var form = document.querySelector('.img-upload__form');
 
-var HestagData = {
+var HastagData = {
   START_POSITION: 0,
   MAX_COUNT: 5,
   MIN_LENGTH: 2,
@@ -129,27 +129,27 @@ var HestagData = {
 };
 
 var Message = {
-  HESTAG_START: 'Хэш-тег начинается с символа #',
-  HESTAG_MIN_SYMBOL: 'Хеш-тег не может состоять только из одной решётки',
-  HESTAG_MAX_LENGTH: 'Максимальная длина одного хэш-тега ',
-  HESTAG_VALUE_INCLUSIVE: ' имволов, включая решётку',
-  HESTAG_NO_REPEAT: 'Один и тот же хэш-тег не может быть использован дважды',
-  HESTAG_MAX_NUMBER: 'Хэштегов может быть максимум ',
-  HESTAG_SEPARATOR: 'Хэш-теги разделяются пробелами'
+  HASTAG_START: 'Хэш-тег начинается с символа #',
+  HASTAG_MIN_SYMBOL: 'Хеш-тег не может состоять только из одной решётки',
+  HASTAG_MAX_LENGTH: 'Максимальная длина одного хэш-тега ',
+  HASTAG_VALUE_INCLUSIVE: ' имволов, включая решётку',
+  HASTAG_NO_REPEAT: 'Один и тот же хэш-тег не может быть использован дважды',
+  HASTAG_MAX_NUMBER: 'Хэштегов может быть максимум ',
+  HASTAG_SEPARATOR: 'Хэш-теги разделяются пробелами'
 };
 
 var validateHashtag = function (hashtag) {
-  if (hashtag[HestagData.START_POSITION] !== '#') {
-    inputHashtag.setCustomValidity(Message.HESTAG_START);
+  if (hashtag[HastagData.START_POSITION] !== '#') {
+    inputHashtag.setCustomValidity(Message.HASTAG_START);
     return false;
-  } else if (hashtag.length < HestagData.MIN_LENGTH) {
-    inputHashtag.setCustomValidity(Message.HESTAG_MIN_SYMBOL);
+  } else if (hashtag.length < HastagData.MIN_LENGTH) {
+    inputHashtag.setCustomValidity(Message.HASTAG_MIN_SYMBOL);
     return false;
-  } else if (hashtag.length > HestagData.MAX_LENGTH) {
-    inputHashtag.setCustomValidity(Message.HESTAG_MAX_LENGTH + HestagData.MAX_LENGTH + Message.HESTAG_VALUE_INCLUSIVE);
+  } else if (hashtag.length > HastagData.MAX_LENGTH) {
+    inputHashtag.setCustomValidity(Message.HASTAG_MAX_LENGTH + HastagData.MAX_LENGTH + Message.HASTAG_VALUE_INCLUSIVE);
     return false;
-  } else if (hashtag.indexOf('#', HestagData.VALID_POSITION) > 0) {
-    inputHashtag.setCustomValidity(Message.HESTAG_SEPARATOR);
+  } else if (hashtag.indexOf('#', HastagData.VALID_POSITION) > 0) {
+    inputHashtag.setCustomValidity(Message.HASTAG_SEPARATOR);
     return false;
   }
   return true;
@@ -165,12 +165,12 @@ var onSubmitButtonClick = function (evt) {
       }
       var positionNextHashtag = i + 1;
       if (hashtagArray.indexOf(hashtagArray[i], positionNextHashtag) > 0) {
-        inputHashtag.setCustomValidity(Message.HESTAG_NO_REPEAT);
+        inputHashtag.setCustomValidity(Message.HASTAG_NO_REPEAT);
         break;
       }
     }
-    if (hashtagArray.length > HestagData.MAX_COUNT) {
-      inputHashtag.setCustomValidity(Message.HESTAG_MAX_NUMBER + HestagData.MAX_COUNT);
+    if (hashtagArray.length > HastagData.MAX_COUNT) {
+      inputHashtag.setCustomValidity(Message.HASTAG_MAX_NUMBER + HastagData.MAX_COUNT);
     }
   }
 };
