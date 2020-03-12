@@ -228,14 +228,13 @@ var FilterCss = {
 
 var preview = document.querySelector('.img-upload__preview');
 var effectValue = document.querySelector('[name="effect-level"]');
-var line = document.querySelector('.effect-level__line');
+var depth = document.querySelector('.effect-level__depth');
 var pin = document.querySelector('.effect-level__pin');
 var blockPin = document.querySelector('.img-upload__effect-level');
 var effectList = document.querySelector('.effects__list');
-
 var makeValueFilter = function (value) {
   pin.style.left = value + 'px';
-  line.style.width = value + 'px';
+  depth.style.width = value + 'px';
 };
 
 var filterChange = function (max, min, filter, position, filterPostfix) {
