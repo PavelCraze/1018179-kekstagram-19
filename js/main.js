@@ -66,12 +66,6 @@ var scaleUp = document.querySelector('.scale__control--bigger');
 var scaleValue = document.querySelector('.scale__control--value');
 var preview = document.querySelector('.img-upload__preview');
 var uploadImg = preview.querySelector('img');
-var effectRadio = document.querySelector('.effects__radio');
-var effectValue = document.querySelector('.effect-level__value');
-var keyCode = {
-  ESC: 27,
-  ENTER: 13
-};
 
 var SCALE_STEP = 25;
 
@@ -108,14 +102,10 @@ var scaleUpHandler = function () {
   }
 };
 
-
-
 upload.addEventListener('change', UploadHandler);
 cancel.addEventListener('click', onCancel);
 scaleDown.addEventListener('click', scaleDownHandler);
 scaleUp.addEventListener('click', scaleUpHandler);
-
-
 
 var pinPosition = {
   MIN: 0,
@@ -160,7 +150,6 @@ var FilterCss = {
   }
 };
 
-var preview = document.querySelector('.img-upload__preview');
 var effectValue = document.querySelector('[name="effect-level"]');
 var depth = document.querySelector('.effect-level__depth');
 var pin = document.querySelector('.effect-level__pin');
@@ -241,7 +230,6 @@ makeDeafultFilter();
 
 var inputHashtag = document.querySelector('.text__hashtags');
 var submitButton = document.querySelector('#upload-submit');
-var form = document.querySelector('.img-upload__form');
 
 var HastagData = {
   START_POSITION: 0,
@@ -278,7 +266,7 @@ var validateHashtag = function (hashtag) {
   return true;
 };
 
-var onSubmitButtonClick = function (evt) {
+var onSubmitButtonClick = function () {
   if (inputHashtag.value !== '') {
     var hashtagArray = inputHashtag.value.toLowerCase().split(' ');
     for (var i = 0; i < hashtagArray.length; i++) {
