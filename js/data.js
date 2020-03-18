@@ -23,13 +23,17 @@
     return Math.floor(Math.random() * (max - min)) + min;
   };
 
+  var getRandomElement = function (arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+
   var getPhotos = function () {
     var photos = [];
     for (var i = 1; i <= PHOTOS_AMOUNT; i++) {
       var photosData = {
         url: 'photos/' + i + '.jpg',
         likes: getRandomPoint(Likes.MIN, Likes.MAX),
-        comments: getRandomPoint(0, COMMENTS.length)
+        comments: getRandomElement(COMMENTS)
       };
       photos.push(photosData);
     }

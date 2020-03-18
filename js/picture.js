@@ -10,7 +10,7 @@
     for (var i = 0; i < window.data.PHOTOS_AMOUNT; i++) {
       var element = template.cloneNode(true);
       element.querySelector('.picture__img').src = photos[i].url;
-      element.querySelector('.picture__comments').textContent = photos[i].comments;
+      element.querySelector('.picture__comments').textContent = photos[i].comments.length;
       element.querySelector('.picture__likes').textContent = photos[i].likes;
       photosFragment.appendChild(element);
     }
@@ -25,7 +25,6 @@
 
   var init = function () {
     window.data.getPhotos();
-    makeElement(window.data.getPhotos());
     window.backend.loadData(successHandler, window.backend.errorHandler);
   };
   init();
