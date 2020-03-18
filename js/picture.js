@@ -16,10 +16,21 @@
     }
     cards.appendChild(photosFragment);
   };
+
+
+  var successHandler = function (photos) {
+    makeElement(photos);
+  };
+
+
+
   var init = function () {
     window.data.getPhotos();
     makeElement(window.data.getPhotos());
+    makeElement(successHandler());
   };
   init();
+
+  window.backend.loadData(successHandler, window.backend.errorHandler);
 
 })();
