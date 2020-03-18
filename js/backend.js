@@ -46,7 +46,7 @@
 
   var errorHandler = function (text) {
     var node = document.createElement('div');
-    node.classList.add('error-node');
+    node.classList.add('error');
     document.body.insertAdjacentElement('afterbegin', node);
     node.textContent = text;
     node.addEventListener('click', removeErrorMessageHandler);
