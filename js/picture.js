@@ -19,7 +19,8 @@
 
 
   var successHandler = function (photos) {
-    makeElement(photos);
+    window.data.getPhotos = photos.slice(0);
+    makeElement(window.data.getPhotos);
   };
 
 
@@ -27,10 +28,10 @@
   var init = function () {
     window.data.getPhotos();
     makeElement(window.data.getPhotos());
-    makeElement(successHandler());
+    window.backend.loadData(successHandler, window.backend.errorHandler);
   };
   init();
 
-  window.backend.loadData(successHandler, window.backend.errorHandler);
+
 
 })();
