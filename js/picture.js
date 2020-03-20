@@ -31,7 +31,7 @@
 
   };
 
-  form.addEventListener('click', function (evt) {
+  form.addEventListener('click', window.debounce(function (evt) {
     var sortData = window.filters.sortData(photosStorage, evt.target.id);
     makeElement(sortData);
     var activeElement = form.querySelector('.img-filters__button--active');
@@ -39,7 +39,7 @@
       activeElement.classList.remove('img-filters__button--active');
     }
     evt.target.classList.add('img-filters__button--active');
-  });
+  }));
 
 
   var successHandler = function (photos) {
@@ -48,7 +48,6 @@
   };
 
   var init = function () {
-    window.data.getPhotos();
     window.backend.loadData(function (photos) {
       photosStorage = photos;
       successHandler(photos);
