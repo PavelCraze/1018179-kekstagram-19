@@ -35,6 +35,7 @@
 
     xhr.timeout = TIME_OUT;
     return xhr;
+
   };
 
 

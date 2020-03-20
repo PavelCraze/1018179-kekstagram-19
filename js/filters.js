@@ -2,64 +2,37 @@
 
 (function () {
 
-  var defaultSort = document.querySelector('#filter-default');
-  var discusssed = document.querySelector('#filter-discussed');
-  var random = document.querySelector('#filter-random');
-
-
-  var removeActiveFilter = function () {
-    var filters = document.querySelector('.img-filters');
-    var filterButton = filters.querySelectorAll('.img-filters__button');
-    filterButton.forEach(function (button) {
-      if (button.classList.contains('img-filters__button--active')) {
-        button.classList.remove('img-filters__button--active');
-      }
-    });
-  };
-
-  var removePhoto = function () {
-    var cards = document.querySelector('.pictures');
-    var photo = cards.querySelectorAll('.picture');
-    photo.forEach(function (item) {
-      cards.removeChild(item);
-    });
-  };
-
   var sortDefault = function (arr) {
     return arr.slice();
   };
 
   var sortDiscussed = function (arr) {
     return arr.slice().sort(function (a, b) {
-      return b.comments - a.comments;
+      return b.comments.length - a.comments.length;
     });
   };
 
-  var sortRandom = function () {
-    return Math.floor(Math.random());
+  var sortRandom = function (arr) {
+    for (var i = arr.length - 1; i > 0; i--) {
+      var J = Math.floor(Math.random() * i);
+      var temp = arr[i];
+      arr[i] = arr[J];
+      arr[J] = temp;
+    }
+    return arr.slice(0, 10);
   };
 
-
-  var defaultChangeHandler = function (evt) {
-    removePhoto();
-    removeActiveFilter();
-    evt.target.classList.add('img-filters__button--active');
+  var sortData = function (data, sortType) {
+    return sortFunctions[sortType](data);
   };
 
-  var discussedChangeHandler = function (evt) {
-    removePhoto();
-    removeActiveFilter();
-    evt.target.classList.add('img-filters__button--active');
+  var sortFunctions = {
+    'filter-default': sortDefault,
+    'filter-discussed': sortDiscussed,
+    'filter-random': sortRandom
   };
 
-  var randomChangeHandler = function (evt) {
-    removePhoto();
-    removeActiveFilter();
-    evt.target.classList.add('img-filters__button--active');
+  window.filters = {
+    sortData: sortData
   };
-
-  defaultSort.addEventListener('click', defaultChangeHandler);
-  discusssed.addEventListener('click', discussedChangeHandler);
-  random.addEventListener('click', randomChangeHandler);
-
 })();
