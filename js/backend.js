@@ -48,22 +48,31 @@
 
   var sendData = function (data, successHandler, errorHandler) {
     var xhr = getRequest(successHandler, errorHandler);
+    xhr.addEventListener('load', function () {
+      successHandler(xhr.response);
+    });
     xhr.open('POST', Url.POST);
     xhr.send(data);
   };
 
-  var errorHandler = function (text) {
-    var node = document.createElement('div');
-    node.classList.add('error');
-    document.body.insertAdjacentElement('afterbegin', node);
-    node.textContent = text;
-    node.addEventListener('click', removeErrorMessageHandler);
-    return node;
-  };
 
-  var removeErrorMessageHandler = function (evt) {
-    document.body.removeChild(evt.target);
-    evt.target.removeEventListener('click', removeErrorMessageHandler);
+  var errorHandler = function () {
+    var errorTemplate = document.querySelectorAll('#error').content.querySelector('.error').cloneNode(true);
+    var main = document.querySelector('main');
+    var errorButton = errorTemplate.querySelector('.error__button');
+    main.appendChild(errorTemplate);
+    document.addEventListener('click', function () {
+      main.removeChild(errorTemplate);
+    });
+    document.addEventListener('keydown', function (evt) {
+      if (evt.keyCode === window.picture.ESC_KEY_CODE) {
+        main.removeChild(errorTemplate);
+      }
+    });
+    errorButton.addEventListener('click', function () {
+      main.removeChild(errorTemplate);
+    });
+
   };
 
   window.backend = {

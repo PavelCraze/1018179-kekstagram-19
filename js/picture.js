@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var ESC_KEY_CODE = 27;
   var bigPic = document.querySelector('.big-picture');
   var commentsBox = bigPic.querySelector('.social__comments');
   var closeButton = bigPic.querySelector('#picture-cancel');
@@ -61,9 +62,17 @@
       }
     };
     commentsLoader.addEventListener('click', commentsUploadHandler);
+    document.addEventListener('keydown', function (evt) {
+      if (evt.keyCode === ESC_KEY_CODE) {
+        bigPic.classList.add('hidden');
+        commentsLoader.removeEventListener('click', commentsUploadHandler);
+        document.querySelector('body').classList.remove('modal-open');
+      }
+    });
     closeButton.addEventListener('click', function () {
       bigPic.classList.add('hidden');
       commentsLoader.removeEventListener('click', commentsUploadHandler);
+      document.querySelector('body').classList.remove('modal-open');
     });
   };
 
@@ -117,7 +126,8 @@
   window.picture = {
     init: init,
     makeElement: makeElement,
-    successHandler: successHandler
+    successHandler: successHandler,
+    ESC_KEY_CODE: ESC_KEY_CODE
   };
 
 })();

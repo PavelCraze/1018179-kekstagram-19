@@ -1,8 +1,10 @@
 'use strict';
 
 (function () {
+  var form = document.querySelector('.img-upload__form');
   var inputHashtag = document.querySelector('.text__hashtags');
   var submitButton = document.querySelector('#upload-submit');
+  var inputComment = document.querySelector('.text__description');
 
   var HastagData = {
     START_POSITION: 0,
@@ -11,6 +13,9 @@
     MAX_LENGTH: 20,
     VALID_POSITION: 1
   };
+
+  var COMMENT_MAX_SIZE = 140;
+
 
   var Message = {
     HASTAG_START: 'Хэш-тег начинается с символа #',
@@ -57,12 +62,44 @@
         inputHashtag.setCustomValidity(Message.HASTAG_MAX_NUMBER + HastagData.MAX_COUNT);
       }
     }
+
+    if (inputComment.value.length > COMMENT_MAX_SIZE) {
+      inputComment.setCustomValidity('Длина комментария не должна превышать 140 символов');
+    } else {
+      inputComment.setCustomValidity(' ');
+    }
   };
 
   var onInputInput = function () {
     inputHashtag.setCustomValidity('');
   };
 
+  var formSubmitHandler = function (evt) {
+    evt.preventDefault();
+    window.backend.sendData(new FormData(form), successHandler, window.backend.errorHandler);
+  };
+
+  var successHandler = function () {
+    window.preview.onCancel();
+    var main = document.querySelector('main');
+    var successTemplate = document.querySelector('#success').content.querySelector('.success').cloneNode(true);
+    var successButton = successTemplate.querySelector('.success__button');
+    main.appendChild(successTemplate);
+    document.addEventListener('click', function () {
+      main.removeChild(successTemplate);
+    });
+    document.addEventListener('keydown', function (evt) {
+      if (evt.keyCode === window.picture.ESC_KEY_CODE) {
+        main.removeChild(successTemplate);
+      }
+    });
+    successButton.addEventListener('click', function () {
+      main.removeChild(successTemplate);
+    });
+    form.reset();
+  };
+
   submitButton.addEventListener('click', onSubmitButtonClick);
   inputHashtag.addEventListener('input', onInputInput);
+  form.addEventListener('submit', formSubmitHandler);
 })();

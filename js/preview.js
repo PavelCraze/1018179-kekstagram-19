@@ -45,6 +45,11 @@
   cancel.addEventListener('click', onCancel);
   scaleDown.addEventListener('click', scaleDownHandler);
   scaleUp.addEventListener('click', scaleUpHandler);
+  document.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === window.picture.ESC_KEY_CODE) {
+      onCancel();
+    }
+  });
 
   var pinPosition = {
     MIN: 0,
@@ -198,4 +203,7 @@
 
   upload.addEventListener('change', imagesChangeHandler);
 
+  window.preview = {
+    onCancel: onCancel
+  };
 })();
