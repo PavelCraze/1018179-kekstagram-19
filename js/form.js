@@ -65,8 +65,6 @@
 
     if (inputComment.value.length > COMMENT_MAX_SIZE) {
       inputComment.setCustomValidity('Длина комментария не должна превышать 140 символов');
-    } else {
-      inputComment.setCustomValidity(' ');
     }
   };
 
