@@ -3,6 +3,7 @@
 (function () {
 
   var Url = {
+    POST: 'https://js.dump.academy/kekstagram',
     GET: 'https://js.dump.academy/kekstagram/data'
   };
 
@@ -45,6 +46,12 @@
     xhr.send();
   };
 
+  var sendData = function (data, successHandler, errorHandler) {
+    var xhr = getRequest(successHandler, errorHandler);
+    xhr.open('POST', Url.POST);
+    xhr.send(data);
+  };
+
   var errorHandler = function (text) {
     var node = document.createElement('div');
     node.classList.add('error');
@@ -61,6 +68,7 @@
 
   window.backend = {
     loadData: loadData,
+    sendData: sendData,
     errorHandler: errorHandler
   };
 
