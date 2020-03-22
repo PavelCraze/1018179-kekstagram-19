@@ -85,6 +85,7 @@
     for (var i = 0; i < photos.length; i++) {
       photosFragment.appendChild(renderPhoto(photos[i]));
     }
+    filters.classList.remove('img-filters--inactive');
     cards.appendChild(photosFragment);
     filters.classList.remove('img-filters--inactive');
   };
