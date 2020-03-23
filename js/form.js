@@ -1,10 +1,7 @@
 'use strict';
 
 (function () {
-  var form = document.querySelector('.img-upload__form');
-  var inputHashtag = document.querySelector('.text__hashtags');
-  var submitButton = document.querySelector('#upload-submit');
-  var inputComment = document.querySelector('.text__description');
+  var COMMENT_MAX_SIZE = 140;
 
   var HastagData = {
     START_POSITION: 0,
@@ -13,9 +10,6 @@
     MAX_LENGTH: 20,
     VALID_POSITION: 1
   };
-
-  var COMMENT_MAX_SIZE = 140;
-
 
   var Message = {
     HASTAG_START: 'Хэш-тег начинается с символа #',
@@ -26,6 +20,11 @@
     HASTAG_MAX_NUMBER: 'Хэштегов может быть максимум ',
     HASTAG_SEPARATOR: 'Хэш-теги разделяются пробелами'
   };
+
+  var form = document.querySelector('.img-upload__form');
+  var inputHashtag = document.querySelector('.text__hashtags');
+  var submitButton = document.querySelector('#upload-submit');
+  var inputComment = document.querySelector('.text__description');
 
   var validateHashtag = function (hashtag) {
     if (hashtag[HastagData.START_POSITION] !== '#') {
@@ -44,7 +43,7 @@
     return true;
   };
 
-  var onSubmitButtonClick = function () {
+  var submitButtonClickHandler = function () {
     if (inputHashtag.value !== '') {
       var hashtagArray = inputHashtag.value.toLowerCase().split(' ');
       for (var i = 0; i < hashtagArray.length; i++) {
@@ -68,7 +67,7 @@
     }
   };
 
-  var onInputInput = function () {
+  var inputHandler = function () {
     inputHashtag.setCustomValidity('');
   };
 
@@ -78,7 +77,7 @@
   };
 
   var successHandler = function () {
-    window.preview.onCancel();
+    window.preview.cancelButtonHandler();
     var main = document.querySelector('main');
     var successTemplate = document.querySelector('#success').content.querySelector('.success').cloneNode(true);
     var successButton = successTemplate.querySelector('.success__button');
@@ -97,7 +96,8 @@
     form.reset();
   };
 
-  submitButton.addEventListener('click', onSubmitButtonClick);
-  inputHashtag.addEventListener('input', onInputInput);
+  submitButton.addEventListener('click', submitButtonClickHandler);
+  inputHashtag.addEventListener('input', inputHandler);
   form.addEventListener('submit', formSubmitHandler);
+
 })();

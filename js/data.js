@@ -45,4 +45,5 @@
     getRandomPoint: getRandomPoint,
     PHOTOS_AMOUNT: PHOTOS_AMOUNT
   };
+
 })();

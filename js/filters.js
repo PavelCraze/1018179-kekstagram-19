@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-
   var sortDefault = function (arr) {
     return arr.slice();
   };
@@ -35,4 +34,5 @@
   window.filters = {
     sortData: sortData
   };
+
 })();

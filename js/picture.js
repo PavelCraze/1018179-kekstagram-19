@@ -2,6 +2,7 @@
 
 (function () {
   var ESC_KEY_CODE = 27;
+
   var bigPic = document.querySelector('.big-picture');
   var commentsBox = bigPic.querySelector('.social__comments');
   var closeButton = bigPic.querySelector('#picture-cancel');
@@ -37,9 +38,7 @@
       comment.remove();
     });
     commentsBox.appendChild(commentsFragment);
-
   };
-
 
   var showBigPhoto = function (photos) {
     var commentsCount = 5;
@@ -48,7 +47,6 @@
     bigPic.querySelector('.big-picture__img').querySelector('img').src = photos.url;
     bigPic.querySelector('.likes-count').textContent = photos.likes;
     bigPic.querySelector('.comments-count').textContent = photos.comments.length;
-
     renderComments(photos.comments, commentsCount);
     var commentsLoader = bigPic.querySelector('.social__comments-loader');
     commentsLoader.classList.remove('hidden');
@@ -61,6 +59,7 @@
         commentsLoader.removeEventListener('click', commentsUploadHandler);
       }
     };
+    commentsUploadHandler();
     commentsLoader.addEventListener('click', commentsUploadHandler);
     document.addEventListener('keydown', function (evt) {
       if (evt.keyCode === ESC_KEY_CODE) {
