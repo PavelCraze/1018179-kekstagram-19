@@ -38,6 +38,7 @@
       comment.remove();
     });
     commentsBox.appendChild(commentsFragment);
+
   };
 
   var showBigPhoto = function (photos) {
@@ -59,7 +60,6 @@
         commentsLoader.removeEventListener('click', commentsUploadHandler);
       }
     };
-    commentsUploadHandler();
     commentsLoader.addEventListener('click', commentsUploadHandler);
     document.addEventListener('keydown', function (evt) {
       if (evt.keyCode === ESC_KEY_CODE) {

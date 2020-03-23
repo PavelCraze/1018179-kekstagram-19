@@ -23,7 +23,6 @@
 
   var form = document.querySelector('.img-upload__form');
   var inputHashtag = document.querySelector('.text__hashtags');
-  var submitButton = document.querySelector('#upload-submit');
   var inputComment = document.querySelector('.text__description');
 
   var validateHashtag = function (hashtag) {
