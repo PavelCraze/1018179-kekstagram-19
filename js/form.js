@@ -73,6 +73,7 @@
 
   var formSubmitHandler = function (evt) {
     evt.preventDefault();
+    submitButtonClickHandler();
     window.backend.sendData(new FormData(form), successHandler, window.backend.errorHandler);
   };
 
@@ -96,7 +97,6 @@
     form.reset();
   };
 
-  submitButton.addEventListener('click', submitButtonClickHandler);
   inputHashtag.addEventListener('input', inputHandler);
   form.addEventListener('submit', formSubmitHandler);
 
