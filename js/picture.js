@@ -42,24 +42,24 @@
   };
 
   var showBigPhoto = function (photos) {
-    var commentsCount = 5;
+    var commentsCount = 0;
     bigPic.classList.remove('hidden');
-    var commenstShowed = bigPic.querySelector('.comments-showed');
+    var commentsShowed = bigPic.querySelector('.comments-showed');
     bigPic.querySelector('.big-picture__img').querySelector('img').src = photos.url;
     bigPic.querySelector('.likes-count').textContent = photos.likes;
     bigPic.querySelector('.comments-count').textContent = photos.comments.length;
-    renderComments(photos.comments, commentsCount);
     var commentsLoader = bigPic.querySelector('.social__comments-loader');
     commentsLoader.classList.remove('hidden');
     var commentsUploadHandler = function () {
       commentsCount += 5;
       renderComments(photos.comments, commentsCount);
-      commenstShowed.textContent = Math.min(photos.comments.length, commentsCount);
+      commentsShowed.textContent = Math.min(photos.comments.length, commentsCount);
       if (commentsCount > photos.comments.length) {
         commentsLoader.classList.add('hidden');
         commentsLoader.removeEventListener('click', commentsUploadHandler);
       }
     };
+    commentsUploadHandler();
     commentsLoader.addEventListener('click', commentsUploadHandler);
     document.addEventListener('keydown', function (evt) {
       if (evt.keyCode === ESC_KEY_CODE) {

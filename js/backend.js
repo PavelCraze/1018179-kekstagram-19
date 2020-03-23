@@ -43,9 +43,6 @@
 
   var sendData = function (data, successHandler, errorHandler) {
     var xhr = getRequest(successHandler, errorHandler);
-    xhr.addEventListener('load', function () {
-      successHandler(xhr.response);
-    });
     xhr.open('POST', Url.POST);
     xhr.send(data);
   };

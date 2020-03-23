@@ -82,16 +82,22 @@
     var successTemplate = document.querySelector('#success').content.querySelector('.success').cloneNode(true);
     var successButton = successTemplate.querySelector('.success__button');
     main.appendChild(successTemplate);
-    document.addEventListener('click', function () {
+    var closeSucces = function () {
       main.removeChild(successTemplate);
-    });
-    document.addEventListener('keydown', function (evt) {
+      document.removeEventListener('keydown', escDownHandler);
+    };
+    var escDownHandler = function (evt) {
       if (evt.keyCode === window.picture.ESC_KEY_CODE) {
-        main.removeChild(successTemplate);
+        closeSucces();
       }
+    };
+    successTemplate.addEventListener('click', function () {
+      closeSucces();
     });
-    successButton.addEventListener('click', function () {
-      main.removeChild(successTemplate);
+    document.addEventListener('keydown', escDownHandler);
+    successButton.addEventListener('click', function (evt) {
+      closeSucces();
+      evt.stopPropagation();
     });
     form.reset();
   };
